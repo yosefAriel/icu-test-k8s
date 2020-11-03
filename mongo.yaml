@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo
+  labels:
+    app: mongo
+spec:
+  containers:
+  - name: mongo
+    image: bitnami/mongodb:4.0
+    env:
+      - name: MONGODB_REPLICA_SET_MODE
+        value: primary
+      - name: MONGODB_REPLICA_SET_KEY
+        value: replicasetkey123
+      - name: MONGODB_ADVERTISED_HOSTNAME
+        valueFrom:
+          secretKeyRef:
+            name: icu-secret
+            key: MONGODB_ADVERTISED_HOSTNAME 
+      - name: MONGODB_ROOT_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: icu-secret
+            key: MONGODB_ROOT_PASSWORD

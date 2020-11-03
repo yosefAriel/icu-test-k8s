@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ftp
+  labels:
+    app: ftp
+spec:
+  containers:
+  - name: ftp
+    image:  stilliard/pure-ftpd
+    ports:
+    - name: ftp-ports
+      containerPort: 21
+    - name: ftp-ports-2
+      containerPort: 30009
+    env:
+      - name: PUBLICHOST
+        value: ftp
+      - name: FTP_USER_NAME
+        value: admin
+      - name: FTP_USER_PASS
+        value: admin
+      - name: FTP_USER_HOME
+        value: /home/admin
